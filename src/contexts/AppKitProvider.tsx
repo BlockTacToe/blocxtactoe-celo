@@ -1,10 +1,8 @@
 'use client'
 
-import { wagmiAdapter, projectId } from '@/lib/appkitConfig'
+import { wagmiAdapter, projectId, networks } from '@/lib/appkitConfig'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { createAppKit } from '@reown/appkit/react'
-// import { baseSepolia } from '@reown/appkit/networks' // Base Sepolia - commented out
-import { base } from '@reown/appkit/networks' // Base Mainnet
 import React, { type ReactNode } from 'react'
 import { cookieToInitialState, WagmiProvider, type Config } from 'wagmi'
 
@@ -27,12 +25,8 @@ const metadata = {
 const modal = createAppKit({
   adapters: [wagmiAdapter],
   projectId,
-  // networks: [baseSepolia], // Base Sepolia - commented out
-  // networks: [base], // Base Mainnet - commented out
-  networks: [celo], // Celo Mainnet
-  // defaultNetwork: baseSepolia, // Base Sepolia - commented out
-  // defaultNetwork: base, // Base Mainnet - commented out
-  defaultNetwork: celo, // Celo Mainnet
+  networks: networks, // Celo Mainnet (from appkitConfig)
+  defaultNetwork: networks[0], // Celo Mainnet (first network from config)
   metadata: metadata,
   features: {
     analytics: true // Optional - defaults to your Cloud configuration
